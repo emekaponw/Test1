@@ -1,0 +1,6 @@
+[ db-server: children ]
+dbgroup1
+
+[ dbgroup1 ]
+server1= [localhost.localdomain]
+IP-addr= [127.0.0.1]
