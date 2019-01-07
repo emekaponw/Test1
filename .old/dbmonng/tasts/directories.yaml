@@ -1,0 +1,14 @@
+....
+- name: ensure directories exit
+  file:
+    path: "{{ oracle.base }}/{{ item.path }}"
+    owner: "{{oracle.user.name }}"
+    group: "{{ oracle.group.name }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  loop:
+    - { path: '', mode: '0751' }
+    - { path: 'bin', mode: '0751' }
+    - { path: 'env', mode: '0750' }
+    - { path: 'admin' mode: '0750' }
+    - { path: 'admin/log', mode: '0750' }

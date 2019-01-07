@@ -1,0 +1,39 @@
+----
+- name: create users_groups
+  group:
+    name: "{{ item.name }}"
+    gid:  "{{ item.gid }}"
+    state: present
+  loop:
+    - { name: '{{ oracle.group.name}}', gid: '{{ oracle.group.id}}'}
+    - { name: 'oinstall', gid: '701'}
+    - { name: 'dbmonng', gid: '702'}
+
+
+  -name: Ensure user dbmong exists
+   user:
+     name: "dbmong"
+     uid: "711"
+     comment: " tech User DB Monitory - ASP Unix DB"
+     create_home: no
+     home: /opt/dbmonng
+     shell: /usr/bin/ksh
+     group: "dbmong"
+     groups: dba,oinstall
+     state: present
+
+  -name: check status of /etc/cron.allo
+   stat:
+     path: /etc/cron.allow
+    register: cron.allow
+
+- name: create /etc/cron.allow
+  copy:
+    content: "dbmonng"
+    path: /etc/cron.allow
+    owner: "{{ oracle.user.name }}"
+    group: "{{ oracle.group.name }}"
+    mode: 0644
+    backup: yes
+    state: present
+  when: cron_allow.stat.exists is defined and cron_allow.stat.exists

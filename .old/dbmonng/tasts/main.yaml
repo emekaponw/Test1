@@ -1,0 +1,6 @@
+----
+- name: create oracle users and groups
+  include: users_groups.yaml
+
+- name: create directories
+   include: directories.yaml   

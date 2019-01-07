@@ -1,0 +1,13 @@
+---
+#
+oracle:
+  user:
+    id: 700
+    name: "oracle"
+    comment: "Oracle_user"
+    home: "/home/oracle"
+ group:
+   id: 700
+   name: "dba"
+   base: "/appexec/oracle"
+   version: "12201"
